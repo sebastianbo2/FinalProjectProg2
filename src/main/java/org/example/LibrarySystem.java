@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -123,6 +124,8 @@ public class LibrarySystem {
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
                 String[] currLine = scanner.nextLine().split(",");
+
+                System.out.println(Arrays.toString(currLine));
 
                 finalList.add(new Magazine(
                         Integer.parseInt(currLine[0]),

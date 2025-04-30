@@ -8,6 +8,7 @@ import java.util.Objects;
 
 public class BasicMember extends User implements Borrowable {
     private List<Novel> borrowedBooks;
+    private double lateFees;
 
     public BasicMember(String email, String name, String password) {
         super(email, name, password);
