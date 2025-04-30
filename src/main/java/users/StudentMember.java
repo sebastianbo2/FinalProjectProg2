@@ -1,4 +1,53 @@
 package users;
 
+import publications.Publication;
+
+import java.util.List;
+import java.util.Objects;
+
 public class StudentMember extends User implements Borrowable {
+    private List<Publication> borrowedBooks;
+    private int studentID;
+
+    public StudentMember(String email, String name, String password, int studentID) {
+        super(email, name, password);
+        this.studentID = studentID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        StudentMember that = (StudentMember) o;
+        return studentID == that.studentID && Objects.equals(borrowedBooks, that.borrowedBooks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), borrowedBooks, studentID);
+    }
+
+    @Override
+    public String toString() {
+        return "StudentMember{" + super.toString() +
+                "borrowedBooks=" + borrowedBooks +
+                ", studentID=" + studentID +
+                '}';
+    }
+
+    public List<Publication> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(List<Publication> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
 }
