@@ -1,7 +1,9 @@
 package users;
 
+import org.example.LibrarySystem;
 import publications.Publication;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +16,28 @@ public abstract class User {
         this.email = email;
         this.name = name;
         this.hashedPassword = password.hashCode();
+    }
+
+    public List<Publication> viewPublications(String type) {
+        List<Publication> finalList = new ArrayList<>();
+
+        switch (type.toLowerCase()) {
+            case "novel":
+                LibrarySystem.novels.forEach(finalList::add);
+                break;
+            case "referencebook":
+                LibrarySystem.referenceBooks.forEach(finalList::add);
+                break;
+            case "magazine":
+                LibrarySystem.magazines.forEach(finalList::add);
+                break;
+            default:
+                LibrarySystem.novels.forEach(finalList::add);
+                LibrarySystem.referenceBooks.forEach(finalList::add);
+                LibrarySystem.magazines.forEach(finalList::add);
+        }
+
+        return finalList;
     }
 
     @Override

@@ -1,18 +1,18 @@
 package users;
 
 import publications.Novel;
+import publications.Publication;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class BasicMember extends User implements Borrowable {
-    private List<Novel> borrowedBooks;
+    private Map<Publication, LocalDateTime> borrowedBooks;
     private double lateFees;
 
     public BasicMember(String email, String name, String password) {
         super(email, name, password);
-        this.borrowedBooks = new ArrayList<>();
+        this.borrowedBooks = new HashMap<>();
     }
 
     @Override
@@ -35,11 +35,11 @@ public class BasicMember extends User implements Borrowable {
                 '}';
     }
 
-    public List<Novel> getBorrowedBooks() {
+    public Map<Publication, LocalDateTime> getBorrowedBooks() {
         return borrowedBooks;
     }
 
-    public void setBorrowedBooks(List<Novel> borrowedBooks) {
+    public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
 }

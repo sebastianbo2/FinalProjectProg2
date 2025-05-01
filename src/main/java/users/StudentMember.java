@@ -2,11 +2,12 @@ package users;
 
 import publications.Publication;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 public class StudentMember extends User implements Borrowable {
-    private List<Publication> borrowedBooks;
+    private Map<Publication, LocalDateTime> borrowedBooks;
     private int studentID;
     private double lateFees;
 
@@ -36,11 +37,11 @@ public class StudentMember extends User implements Borrowable {
                 '}';
     }
 
-    public List<Publication> getBorrowedBooks() {
+    public Map<Publication, LocalDateTime> getBorrowedBooks() {
         return borrowedBooks;
     }
 
-    public void setBorrowedBooks(List<Publication> borrowedBooks) {
+    public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
     }
 

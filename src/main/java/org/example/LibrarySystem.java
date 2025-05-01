@@ -125,8 +125,6 @@ public class LibrarySystem {
             while (scanner.hasNext()) {
                 String[] currLine = scanner.nextLine().split(",");
 
-                System.out.println(Arrays.toString(currLine));
-
                 finalList.add(new Magazine(
                         Integer.parseInt(currLine[0]),
                         currLine[1],
