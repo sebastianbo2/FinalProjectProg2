@@ -40,6 +40,18 @@ public abstract class User {
         return finalList;
     }
 
+    public List<Publication> search(String title) {
+        // TODO
+
+        return new ArrayList<>();
+    }
+
+    public List<Publication> search(String title, String author) {
+        // TODO
+
+        return new ArrayList<>();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

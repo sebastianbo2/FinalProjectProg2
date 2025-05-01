@@ -15,6 +15,30 @@ public class BasicMember extends User implements Borrowable {
         this.borrowedBooks = new HashMap<>();
     }
 
+    public boolean borrowBook() {
+        // TODO
+
+        return true;
+    }
+
+    public boolean reserveBook() {
+        // TODO
+
+        return true;
+    }
+
+    public boolean returnBook() {
+        // TODO
+
+        return true;
+    }
+
+    public boolean payFees() {
+        // TODO
+
+        return true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -41,5 +65,19 @@ public class BasicMember extends User implements Borrowable {
 
     public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
+    }
+
+    @Override
+    public double calculateFees() {
+        // TODO
+
+        return 0;
+    }
+
+    @Override
+    public boolean borrow() {
+        // TODO
+
+        return false;
     }
 }

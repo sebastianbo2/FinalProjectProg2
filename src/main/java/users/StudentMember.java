@@ -52,4 +52,18 @@ public class StudentMember extends User implements Borrowable {
     public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
+
+    @Override
+    public double calculateFees() {
+        // TODO
+
+        return 0;
+    }
+
+    @Override
+    public boolean borrow() {
+        // TODO
+
+        return false;
+    }
 }

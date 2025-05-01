@@ -6,6 +6,7 @@ import publications.Novel;
 import publications.Publication;
 import publications.ReferenceBook;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Librarian extends User {
@@ -37,6 +38,16 @@ public class Librarian extends User {
         }
 
         LibrarySystem.export();
+    }
+
+    public void processReturn() {
+        // TODO
+    }
+
+    public List<User> viewLateFees() {
+        // TODO
+
+        return new ArrayList<>();
     }
 
     @Override
