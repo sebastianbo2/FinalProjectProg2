@@ -1,5 +1,6 @@
 package publications;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public abstract class Publication {
@@ -33,6 +34,23 @@ public abstract class Publication {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", availableCopies=" + availableCopies;
+    }
+
+    public static class PublicationComparator implements Comparator<Publication> {
+        String type;
+
+        public PublicationComparator(String type) {
+            this.type = type;
+        }
+
+        @Override
+        public int compare(Publication o1, Publication o2) {
+            return switch (type) {
+                case "author" -> o1.author.compareTo(o2.author);
+                case "year" -> Integer.compare(o1.year, o2.year);
+                default -> o1.title.compareTo(o2.title);
+            };
+        }
     }
 
     public int getYear() {

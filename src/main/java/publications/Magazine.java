@@ -10,6 +10,10 @@ public class Magazine extends Publication {
         this.contentSummary = contentSummary;
     }
 
+    public String viewSummary() {
+        return this.contentSummary;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
