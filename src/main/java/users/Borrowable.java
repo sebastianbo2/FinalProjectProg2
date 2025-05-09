@@ -1,7 +1,10 @@
 package users;
 
-public interface Borrowable {
-    double calculateFees();
+import publications.Novel;
+import publications.Publication;
 
-    boolean borrow();
+public interface Borrowable {
+    double calculateFees(Publication publication);
+
+    boolean borrow(Publication publication);
 }

@@ -6,7 +6,7 @@ import publications.Publication;
 import java.time.LocalDateTime;
 import java.util.*;
 
-public class BasicMember extends User implements Borrowable {
+public class BasicMember extends User implements Borrowable, Comparable<BasicMember>{
     private Map<Publication, LocalDateTime> borrowedBooks;
     private double lateFees;
 
@@ -34,9 +34,43 @@ public class BasicMember extends User implements Borrowable {
     }
 
     public boolean payFees() {
-        // TODO
-
+        System.out.println("Redirecting..");
         return true;
+    }
+
+    @Override
+    public double calculateFees(Publication publication) {
+        if (!borrowedBooks.containsKey(publication)) {
+            System.out.println("Invalid request, you have not borrowed this book!");
+            return 0;
+        }
+
+        if (borrowedBooks.get(publication).plusYears(1).isAfter(LocalDateTime.now())) {
+            return 25;
+        }
+
+        return borrowedBooks.get(publication).getDayOfYear() - LocalDateTime.now().getDayOfYear() * 0.05;
+    }
+
+    @Override
+    public boolean borrow(Publication publication) {
+        if (borrowedBooks.containsKey(publication)) {
+            System.out.println("You have already borrowed this book!");
+            return false;
+        }
+
+        if (publication instanceof Novel novel) {
+            borrowedBooks.put(novel, LocalDateTime.now().plusWeeks(2));
+        } else {
+            System.out.println("You can only borrow novels, please try a different book!");
+        }
+
+        return false;
+    }
+
+    @Override
+    public int compareTo(BasicMember o) {
+        return Double.compare(this.lateFees, o.lateFees);
     }
 
     @Override
@@ -65,19 +99,5 @@ public class BasicMember extends User implements Borrowable {
 
     public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
-    }
-
-    @Override
-    public double calculateFees() {
-        // TODO
-
-        return 0;
-    }
-
-    @Override
-    public boolean borrow() {
-        // TODO
-
-        return false;
     }
 }
