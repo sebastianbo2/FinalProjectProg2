@@ -69,6 +69,11 @@ public class StudentMember extends User implements Borrowable, Comparable<Studen
             return false;
         }
 
+        if (publication.getAvailableCopies() < 1) {
+            System.out.println("This book is not currently available to borrow, please try another time!");
+            return false;
+        }
+
         if (borrowedBooks.containsKey(publication)) {
             System.out.println("You have already borrowed this book!");
             return false;

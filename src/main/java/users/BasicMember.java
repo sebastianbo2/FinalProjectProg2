@@ -50,6 +50,11 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
             return false;
         }
 
+        if (publication.getAvailableCopies() < 1) {
+            System.out.println("This book is not currently available to borrow, please try another time!");
+            return false;
+        }
+
         if (publication instanceof Novel novel) {
             borrowedBooks.put(novel, LocalDateTime.now().plusWeeks(2));
         } else {
