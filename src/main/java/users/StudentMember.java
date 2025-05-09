@@ -67,7 +67,7 @@ public class StudentMember extends User implements Borrowable, Comparable<Studen
     @Override
     public double calculateFees(Publication publication) {
         if (!borrowedBooks.containsKey(publication)) {
-            System.out.println("Invalid request, you have not borrowed this book!");
+            System.out.println("Invalid request, you have already borrowed this book!");
             return 0;
         }
 

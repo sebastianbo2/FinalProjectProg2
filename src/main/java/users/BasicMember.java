@@ -15,24 +15,6 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         this.borrowedBooks = new HashMap<>();
     }
 
-    public boolean borrowBook() {
-        // TODO
-
-        return true;
-    }
-
-    public boolean reserveBook() {
-        // TODO
-
-        return true;
-    }
-
-    public boolean returnBook() {
-        // TODO
-
-        return true;
-    }
-
     public boolean payFees() {
         System.out.println("Redirecting..");
         return true;
