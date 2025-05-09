@@ -48,22 +48,6 @@ public class StudentMember extends User implements Borrowable, Comparable<Studen
                 '}';
     }
 
-    public Map<Publication, LocalDateTime> getBorrowedBooks() {
-        return borrowedBooks;
-    }
-
-    public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
-    }
-
-    public int getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(int studentID) {
-        this.studentID = studentID;
-    }
-
     @Override
     public double calculateFees(Publication publication) {
         if (!borrowedBooks.containsKey(publication)) {
@@ -92,5 +76,29 @@ public class StudentMember extends User implements Borrowable, Comparable<Studen
 
         borrowedBooks.put(publication, LocalDateTime.now().plusWeeks(4));
         return true;
+    }
+
+    public Map<Publication, LocalDateTime> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
+    }
+
+    public double getLateFees() {
+        return lateFees;
+    }
+
+    public void setLateFees(double lateFees) {
+        this.lateFees = lateFees;
     }
 }

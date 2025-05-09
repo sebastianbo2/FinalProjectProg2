@@ -15,6 +15,15 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         this.borrowedBooks = new HashMap<>();
     }
 
+    public void returnBook(Publication publication, Librarian processingLibrarian) {
+        if (!borrowedBooks.containsKey(publication)) {
+            System.out.println("You have not borrowed this book!");
+            return;
+        }
+
+        processingLibrarian.processReturn(this, publication);
+    }
+
     public boolean payFees() {
         System.out.println("Redirecting..");
         return true;
@@ -81,5 +90,13 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
 
     public void setBorrowedBooks(Map<Publication, LocalDateTime> borrowedBooks) {
         this.borrowedBooks = borrowedBooks;
+    }
+
+    public double getLateFees() {
+        return lateFees;
+    }
+
+    public void setLateFees(double lateFees) {
+        this.lateFees = lateFees;
     }
 }

@@ -7,13 +7,17 @@ import publications.Publication;
 import publications.ReferenceBook;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Librarian extends User {
-    List<User> usersWithFees;
+    List<BasicMember> basicUsersWithFees;
+    List<StudentMember> studentUsersWithFees;
 
     public Librarian(String email, String name, String password) {
         super(email, name, password);
+        this.basicUsersWithFees = new ArrayList<>();
+        this.studentUsersWithFees = new ArrayList<>();
     }
 
     public void addPublication(Publication publication) {
@@ -40,14 +44,34 @@ public class Librarian extends User {
         LibrarySystem.export();
     }
 
-    public void processReturn() {
-        // TODO
+    public void processReturn(BasicMember basicMember, Publication publication) {
+        basicMember.getBorrowedBooks().remove(publication);
+        basicMember.setLateFees(basicMember.calculateFees(publication));
+
+        if (basicMember.getLateFees() > 0) {
+            basicUsersWithFees.add(basicMember);
+        }
     }
 
-    public List<User> viewLateFees() {
-        // TODO
+    public void processReturn(StudentMember student, Publication publication) {
+        student.getBorrowedBooks().remove(publication);
+        student.setLateFees(student.calculateFees(publication));
 
-        return new ArrayList<>();
+        if (student.getLateFees() > 0) {
+            studentUsersWithFees.add(student);
+        }
+    }
+
+    public List<StudentMember> viewStudentsWithLateFees() {
+        Collections.sort(studentUsersWithFees);
+
+        return studentUsersWithFees;
+    }
+
+    public List<BasicMember> viewBasicMembersWithLateFees() {
+        Collections.sort(basicUsersWithFees);
+
+        return basicUsersWithFees;
     }
 
     @Override
