@@ -1,3 +1,4 @@
+import org.example.LibrarySystem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import publications.Publication;
@@ -56,4 +57,38 @@ public class UserTest {
         Assertions.assertEquals(expected, result);
     }
 
+    @Test
+    public void testSearch_Title() {
+        User user = new BasicMember("email", "john", "123");
+
+        List<Publication> expected = new ArrayList<>();
+        expected.add(LibrarySystem.referenceBooks.get(1));
+
+        List<Publication> result = user.search("The story of water");
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSearch_TitleAndAuthor_Wrong() {
+        User user = new BasicMember("email", "john", "123");
+
+        List<Publication> expected = new ArrayList<>();
+
+        List<Publication> result = user.search("The story of water", "");
+
+        Assertions.assertEquals(expected, result);
+    }
+
+    @Test
+    public void testSearch_TitleAndAuthor_Right() {
+        User user = new BasicMember("email", "john", "123");
+
+        List<Publication> expected = new ArrayList<>();
+        expected.add(LibrarySystem.referenceBooks.get(1));
+
+        List<Publication> result = user.search("The story of water", "John");
+
+        Assertions.assertEquals(expected, result);
+    }
 }

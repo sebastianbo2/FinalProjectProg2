@@ -41,15 +41,39 @@ public abstract class User {
     }
 
     public List<Publication> search(String title) {
-        // TODO
+        List<Publication> validPublications = new ArrayList<>();
 
-        return new ArrayList<>();
+        LibrarySystem.novels.forEach((novel) -> {
+            if (novel.getTitle().equalsIgnoreCase(title)) {
+                validPublications.add(novel);
+            };
+        });
+
+        LibrarySystem.referenceBooks.forEach((referenceBook) -> {
+            if (referenceBook.getTitle().equalsIgnoreCase(title)) {
+                validPublications.add(referenceBook);
+            };
+        });
+
+        return validPublications;
     }
 
     public List<Publication> search(String title, String author) {
-        // TODO
+        List<Publication> validPublications = new ArrayList<>();
 
-        return new ArrayList<>();
+        LibrarySystem.novels.forEach((novel) -> {
+            if (novel.getTitle().equalsIgnoreCase(title)) {
+                validPublications.add(novel);
+            };
+        });
+
+        LibrarySystem.referenceBooks.forEach((novel) -> {
+            if (novel.getTitle().equalsIgnoreCase(title)) {
+                validPublications.add(novel);
+            };
+        });
+
+        return validPublications.stream().filter(publication -> publication.getAuthor().equals(author)).toList();
     }
 
     @Override
