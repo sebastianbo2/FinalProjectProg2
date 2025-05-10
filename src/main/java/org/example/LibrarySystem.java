@@ -4,6 +4,9 @@ import publications.Magazine;
 import publications.Novel;
 import publications.Publication;
 import publications.ReferenceBook;
+import users.BasicMember;
+import users.Librarian;
+import users.StudentMember;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -18,18 +21,67 @@ public class LibrarySystem {
     private static final String referenceBooksPath = "src/main/resources/referenceBooks.csv";
     private static final String magazinesPath = "src/main/resources/magazines.csv";
 
+    private static final String studentMembersPath = "src/main/resources/students.csv";
+    private static final String basicMembersPath = "src/main/resources/basicMembers.csv";
+    private static final String librariansPath = "src/main/resources/librarians.csv";
+
     public static List<Novel> novels = initNovels(novelsPath);
     public static List<ReferenceBook> referenceBooks = initReferenceBooks(referenceBooksPath);
     public static List<Magazine> magazines = initMagazines(magazinesPath);
+
+    public static List<BasicMember> basicMembers = initBasicMembers(basicMembersPath);
+    public static List<StudentMember> studentMembers = initStudentMembers(studentMembersPath);
+    public static List<Librarian> librarians = initLibrarians(librariansPath);
 
     public static void export() {
         File novelsFile = new File(novelsPath);
         File referenceBooksFile = new File(referenceBooksPath);
         File magazinesFile = new File(magazinesPath);
+        File basicMembersFile = new File(basicMembersPath);
+        File studentMembersFile = new File(studentMembersPath);
 
         exportNovels(novelsFile);
         exportReferenceBooks(referenceBooksFile);
         exportMagazines(magazinesFile);
+        exportBasicMembers(basicMembersFile);
+        exportStudentMembers(studentMembersFile);
+    }
+
+    private static void exportLibrarians(File basicMembersFile) {
+        try (FileWriter writer = new FileWriter(basicMembersFile, false)) {
+            for (Librarian librarian : librarians) {
+                writer.write(librarian.getEmail() + ",");
+                writer.write(librarian.getName() + ",");
+                writer.write(librarian.getHashedPassword() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing to file, " + e.getMessage());
+        }
+    }
+
+    private static void exportBasicMembers(File basicMembersFile) {
+        try (FileWriter writer = new FileWriter(basicMembersFile, false)) {
+            for (BasicMember basicMember : basicMembers) {
+                writer.write(basicMember.getEmail() + ",");
+                writer.write(basicMember.getName() + ",");
+                writer.write(basicMember.getHashedPassword() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing to file, " + e.getMessage());
+        }
+    }
+
+    private static void exportStudentMembers(File studentMembersFile) {
+        try (FileWriter writer = new FileWriter(studentMembersFile, false)) {
+            for (StudentMember studentMember : studentMembers) {
+                writer.write(studentMember.getEmail() + ",");
+                writer.write(studentMember.getName() + ",");
+                writer.write(studentMember.getHashedPassword() + ",");
+                writer.write(studentMember.getStudentID() + "\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing to file, " + e.getMessage());
+        }
     }
 
     private static void exportNovels(File novelsFile) {
@@ -71,6 +123,70 @@ public class LibrarySystem {
         } catch (IOException e) {
             System.out.println("Error writing to file, " + e.getMessage());
         }
+    }
+
+    public static List<Librarian> initLibrarians(String path) {
+        File file = new File(path);
+        List<Librarian> finalList = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                String[] currLine = scanner.nextLine().split(",");
+
+                finalList.add(new Librarian(
+                        currLine[0],
+                        currLine[1],
+                        Integer.parseInt(currLine[2])
+                ));
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading from file, " + e.getMessage());
+        }
+
+        return finalList;
+    }
+
+    public static List<BasicMember> initBasicMembers(String path) {
+        File file = new File(path);
+        List<BasicMember> finalList = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                String[] currLine = scanner.nextLine().split(",");
+
+                finalList.add(new BasicMember(
+                        currLine[0],
+                        currLine[1],
+                        Integer.parseInt(currLine[2])
+                ));
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading from file, " + e.getMessage());
+        }
+
+        return finalList;
+    }
+
+    public static List<StudentMember> initStudentMembers(String path) {
+        File file = new File(path);
+        List<StudentMember> finalList = new ArrayList<>();
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                String[] currLine = scanner.nextLine().split(",");
+
+                finalList.add(new StudentMember(
+                        currLine[0],
+                        currLine[1],
+                        Integer.parseInt(currLine[2]),
+                        Integer.parseInt(currLine[3])
+                ));
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading from file, " + e.getMessage());
+        }
+
+        return finalList;
     }
 
     public static List<Novel> initNovels(String path) {

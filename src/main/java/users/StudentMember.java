@@ -17,6 +17,12 @@ public class StudentMember extends User implements Borrowable, Comparable<Studen
         this.borrowedBooks = new HashMap<>();
     }
 
+    public StudentMember(String email, String name, int hashedPassword, int studentID) {
+        super(email, name, hashedPassword);
+        this.studentID = studentID;
+        this.borrowedBooks = new HashMap<>();
+    }
+
     public boolean payFees() {
         System.out.println("Redirecting..");
         return true;

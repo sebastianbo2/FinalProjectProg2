@@ -15,6 +15,11 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         this.borrowedBooks = new HashMap<>();
     }
 
+    public BasicMember(String email, String name, int hashedPassword) {
+        super(email, name, hashedPassword);
+        this.borrowedBooks = new HashMap<>();
+    }
+
     public void returnBook(Publication publication, Librarian processingLibrarian) {
         if (!borrowedBooks.containsKey(publication)) {
             System.out.println("You have not borrowed this book!");

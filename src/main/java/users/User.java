@@ -18,6 +18,12 @@ public abstract class User {
         this.hashedPassword = password.hashCode();
     }
 
+    public User(String email, String name, int hashedPassword) {
+        this.email = email;
+        this.name = name;
+        this.hashedPassword = hashedPassword;
+    }
+
     public List<Publication> viewPublications(String type) {
         List<Publication> finalList = new ArrayList<>();
 

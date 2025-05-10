@@ -20,6 +20,12 @@ public class Librarian extends User {
         this.studentUsersWithFees = new ArrayList<>();
     }
 
+    public Librarian(String email, String name, int hashedPassword) {
+        super(email, name, hashedPassword);
+        this.basicUsersWithFees = new ArrayList<>();
+        this.studentUsersWithFees = new ArrayList<>();
+    }
+
     public void addPublication(Publication publication) {
         if (publication instanceof Novel novel) {
             LibrarySystem.novels.add(novel);
