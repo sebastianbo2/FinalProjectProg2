@@ -39,12 +39,14 @@ public class LibrarySystem {
         File magazinesFile = new File(magazinesPath);
         File basicMembersFile = new File(basicMembersPath);
         File studentMembersFile = new File(studentMembersPath);
+        File librariansFile = new File(librariansPath);
 
         exportNovels(novelsFile);
         exportReferenceBooks(referenceBooksFile);
         exportMagazines(magazinesFile);
         exportBasicMembers(basicMembersFile);
         exportStudentMembers(studentMembersFile);
+        exportLibrarians(librariansFile);
     }
 
     private static void exportLibrarians(File basicMembersFile) {
