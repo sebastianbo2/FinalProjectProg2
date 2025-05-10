@@ -24,6 +24,11 @@ public abstract class User {
         this.hashedPassword = hashedPassword;
     }
 
+    /**
+     * view all publications of a certain type (leave empty to see all)
+     * @param type the type of publications to see
+     * @return a list of all publications of that type
+     */
     public List<Publication> viewPublications(String type) {
         List<Publication> finalList = new ArrayList<>();
 
@@ -46,6 +51,11 @@ public abstract class User {
         return finalList;
     }
 
+    /**
+     * search for a publication by title
+     * @param title the title to search for
+     * @return a list of publications with that title
+     */
     public List<Publication> search(String title) {
         List<Publication> validPublications = new ArrayList<>();
 
@@ -64,6 +74,12 @@ public abstract class User {
         return validPublications;
     }
 
+    /**
+     * search for a publication by title and author
+     * @param title the title for search for
+     * @param author the author to search for
+     * @return a list of publications that have that title and author
+     */
     public List<Publication> search(String title, String author) {
         List<Publication> validPublications = new ArrayList<>();
 

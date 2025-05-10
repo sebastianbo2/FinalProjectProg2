@@ -20,6 +20,11 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         this.borrowedBooks = new HashMap<>();
     }
 
+    /**
+     * returns a book back to the library, provided that the book has been borrowed already
+     * @param publication
+     * @param processingLibrarian
+     */
     public void returnBook(Publication publication, Librarian processingLibrarian) {
         if (!borrowedBooks.containsKey(publication)) {
             System.out.println("You have not borrowed this book!");
@@ -29,11 +34,17 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         processingLibrarian.processReturn(this, publication);
     }
 
+    // UNIMPLEMENTED METHOD
     public boolean payFees() {
         System.out.println("Redirecting..");
         return true;
     }
 
+    /**
+     * calculates the fees a member has to pay for a borrowed book (15 cents per missed day)
+     * @param publication the book to calculate fees of
+     * @return the fees for that book
+     */
     @Override
     public double calculateFees(Publication publication) {
         if (!borrowedBooks.containsKey(publication)) {
@@ -48,6 +59,11 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
         return borrowedBooks.get(publication).getDayOfYear() - LocalDateTime.now().getDayOfYear() * 0.05;
     }
 
+    /**
+     * borrows a book from the library system, provided it is a novel
+     * @param publication the book to borrow
+     * @return whether it was successfully borrowed (true) or not (false)
+     */
     @Override
     public boolean borrow(Publication publication) {
         if (borrowedBooks.containsKey(publication)) {
@@ -62,6 +78,7 @@ public class BasicMember extends User implements Borrowable, Comparable<BasicMem
 
         if (publication instanceof Novel novel) {
             borrowedBooks.put(novel, LocalDateTime.now().plusWeeks(2));
+            publication.setAvailableCopies(publication.getAvailableCopies() - 1);
         } else {
             System.out.println("You can only borrow novels, please try a different book!");
         }

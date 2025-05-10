@@ -50,18 +50,30 @@ public class Librarian extends User {
         LibrarySystem.export();
     }
 
+    /**
+     * processes a member's book return and calculates the fees to pay for that book
+     * @param basicMember the member returning a book
+     * @param publication the book the member is returning
+     */
     public void processReturn(BasicMember basicMember, Publication publication) {
         basicMember.getBorrowedBooks().remove(publication);
         basicMember.setLateFees(basicMember.calculateFees(publication));
+        publication.setAvailableCopies(publication.getAvailableCopies() + 1);
 
         if (basicMember.getLateFees() > 0) {
             basicUsersWithFees.add(basicMember);
         }
     }
 
+    /**
+     * processes a student's book return and calculates the fees to pay for that book
+     * @param student the student returning a book
+     * @param publication the book the member is returning
+     */
     public void processReturn(StudentMember student, Publication publication) {
         student.getBorrowedBooks().remove(publication);
         student.setLateFees(student.calculateFees(publication));
+        publication.setAvailableCopies(publication.getAvailableCopies() + 1);
 
         if (student.getLateFees() > 0) {
             studentUsersWithFees.add(student);
